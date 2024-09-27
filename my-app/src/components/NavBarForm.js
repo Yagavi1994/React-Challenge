@@ -1,35 +1,35 @@
-import React, {Component} from 'react'
+import React, {useState} from 'react'
 import css from "./css/NavBarForm.module.css";
 
 
-export class NavBarForm extends Component {
-
-  constructor(props) {
-    super(props)
-      this.inputName = React.createRef();
-      this.inputPassword = React.createRef();
-  }
-
-    handleSubmit = (event) => {
-      event.preventDefault();
+function NavBarForm() {
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(name, password);
     }
-
-  render() {
     return (
       <div className={css.NavBar}>
-        <form action="/submit" method="post">
+        <form>
+
           <label htmlFor="username">Username:</label>
-          <input type="text" id="username" ref={this.inputName} name="username" required />
+          <input type="text" id="username" 
+          value={name}
+          onChange={(e) => setName(e.target.value)} 
+          name="username" required />
 
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" ref={this.inputPassword} name="password" required />
+          <input type="password" id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+          name="password" required />
 
-          <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+          <input type="submit" value="Submit" onClick={handleSubmit}/>
         </form>
       </div>
     )
   }
-}
 
 
 export default NavBarForm
